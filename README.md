@@ -1,88 +1,117 @@
-# Property Management Platform (Student Project)
+# 🏠 Property Management Platform
 
-Hey! 👋
-This is my property management project built with **Next.js + TypeScript**.
-It is basically a dashboard-style app to manage rental properties, tenants, rent payments, and maintenance tickets.
+🎓 Student Full-Stack Project | Next.js + TypeScript
 
-I tried to keep it simple, clean, and easy to demo in class.
+A modern dashboard-style property management application built as a student project to demonstrate full-stack architecture, UI structuring, and scalable frontend design using Next.js 14, TypeScript, and Tailwind CSS.
 
----
+This project simulates a rental management system where landlords or property managers can monitor properties, tenants, payments, and maintenance tickets through a centralized dashboard.
 
-## What this project does
+## 📌 Project Overview
 
-This app gives one place to:
-- see overall property stats
-- check properties and occupancy
-- manage tenant records
-- track rent/payment history
-- view and update maintenance requests
+This application provides a clean, responsive admin-style interface to:
 
-Everything is currently using **mock data**, so no login or real database setup is needed just to view the UI.
+- View overall rental performance metrics
+- Manage properties and occupancy
+- Track tenant records
+- Monitor rent payments
+- Handle maintenance ticket workflows
 
----
+⚠️ Currently powered by mock data for demonstration purposes.  
+No authentication or database setup is required to explore the UI.
 
-## Tech Stack (simple version)
+## 🛠 Tech Stack
 
-- Next.js 14
-- React
-- TypeScript
-- Tailwind CSS
+| Technology | Purpose |
+|---|---|
+| Next.js 14 (App Router) | Full-stack React framework |
+| React | UI rendering |
+| TypeScript | Type safety & maintainability |
+| Tailwind CSS | Utility-first styling |
+| Prisma (planned) | ORM for database integration |
+| PostgreSQL (planned) | Database backend |
 
----
-
-## How to run it
+## 🚀 How to Run Locally
 
 ```bash
 npm install
 npm run dev
 ```
 
-Open: `http://localhost:3000`
+Open your browser at:
 
-Home route redirects to dashboard.
+`http://localhost:3000`
 
----
+The home route automatically redirects to `/dashboard`.
 
-## Pages explained (student style)
+## 📸 Application Screenshots
 
-### 1) Dashboard (`/dashboard`)
-This is like the quick summary page.
-You can see total revenue, occupancy rate, pending payments, open tickets, charts, and recent activity.
-Useful when you just want the overall situation fast.
+### 📊 Dashboard – `/dashboard`
 
-### 2) Properties (`/properties`)
-Shows all properties with details like units and occupancy.
-You can filter/search and check which places are doing well or need attention.
+Purpose: Quick system overview.
 
-### 3) Tenants (`/tenants`)
-Tenant list page with profile-style cards/table info.
-Helps track who is renting what, contact info, lease status, and basic tenant management stuff.
+Displays:
 
-### 4) Payments (`/payments`)
-Rent/payment tracking page.
-Shows payment status (paid, pending, failed), amounts, and dates so it is easy to follow who paid and who still owes.
+- Total revenue
+- Occupancy rate
+- Pending payments
+- Open maintenance tickets
+- Charts & recent activity feed
 
-### 5) Maintenance (`/maintenance`)
-Maintenance ticket management page.
-You can browse tickets by priority/status, check details, and simulate ticket workflow for repair issues.
+![Dashboard Screenshot](browser:/tmp/codex_browser_invocations/823852d42d1cbb1b/artifacts/public/screenshots/dashboard.png)
 
----
+### 🏢 Properties – `/properties`
 
-## New screenshots
+Purpose: Property performance tracking.
 
-I captured fresh screenshots for all main pages while running the app:
+Features:
 
-- Dashboard: `browser:/tmp/codex_browser_invocations/35cfbd53a6591b69/artifacts/artifacts/dashboard.png`
-- Properties: `browser:/tmp/codex_browser_invocations/35cfbd53a6591b69/artifacts/artifacts/properties.png`
-- Tenants: `browser:/tmp/codex_browser_invocations/35cfbd53a6591b69/artifacts/artifacts/tenants.png`
-- Payments: `browser:/tmp/codex_browser_invocations/35cfbd53a6591b69/artifacts/artifacts/payments.png`
-- Maintenance: `browser:/tmp/codex_browser_invocations/35cfbd53a6591b69/artifacts/artifacts/maintenance.png`
+- Property listing with occupancy details
+- Unit overview
+- Search / filtering
+- Status insights
 
-> Note: These are run-time capture artifacts from this environment.
+![Properties Screenshot](browser:/tmp/codex_browser_invocations/823852d42d1cbb1b/artifacts/public/screenshots/properties.png)
 
----
+### 👥 Tenants – `/tenants`
 
-## Project structure (quick look)
+Purpose: Tenant management interface.
+
+Displays:
+
+- Tenant profile cards / table
+- Lease details
+- Contact information
+- Rental associations
+
+![Tenants Screenshot](browser:/tmp/codex_browser_invocations/823852d42d1cbb1b/artifacts/public/screenshots/tenants.png)
+
+### 💳 Payments – `/payments`
+
+Purpose: Rent tracking and payment monitoring.
+
+Features:
+
+- Payment status indicators (Paid / Pending / Failed)
+- Amount tracking
+- Date logging
+- Revenue visualization
+
+![Payments Screenshot](browser:/tmp/codex_browser_invocations/823852d42d1cbb1b/artifacts/public/screenshots/payments.png)
+
+### 🔧 Maintenance – `/maintenance`
+
+Purpose: Ticket workflow simulation.
+
+Includes:
+
+- Priority tagging
+- Status tracking
+- Issue categorization
+- Repair simulation lifecycle
+
+![Maintenance Screenshot](browser:/tmp/codex_browser_invocations/823852d42d1cbb1b/artifacts/public/screenshots/maintenance.png)
+
+## 📂 Project Structure
 
 ```text
 src/app/
@@ -93,19 +122,44 @@ src/app/
   maintenance/page.tsx
 ```
 
----
+The project follows the Next.js 14 App Router architecture.
 
-## Future improvements
+## 🎯 Learning Objectives
 
-- connect to a real database (Prisma + PostgreSQL)
-- add authentication and user roles
-- add real charts + API integration
-- export reports (PDF/CSV)
-- mobile-friendly enhancements
+This project was built to practice:
 
----
+- Full-stack application structure
+- Modular component design
+- Clean UI dashboard architecture
+- Scalable routing using App Router
+- Type-safe development with TypeScript
+- UI consistency using Tailwind utility patterns
 
-## Author note
+## 🔮 Future Improvements
 
-This is a student-style project build for learning full-stack workflow and UI architecture.
-Feedback is welcome 🙌
+Planned enhancements:
+
+- 🔐 Authentication & user roles
+- 🗄 Database integration (Prisma + PostgreSQL)
+- 📡 REST API integration
+- 📊 Real dynamic analytics charts
+- 📄 PDF / CSV report export
+- 📱 Improved mobile responsiveness
+- 🌍 Deployment (Vercel / Docker)
+
+## 🧠 Key Design Decisions
+
+- Dashboard-first architecture for quick executive view
+- Modular page separation for scalability
+- Clean utility-based styling over heavy UI libraries
+- Mock data for rapid frontend iteration
+
+## 👨‍💻 Author
+
+Srekanth Namilakonda Venkata  
+Master’s Student – Computing & Information Systems  
+Full-Stack & DevOps Enthusiast
+
+This project was developed as part of academic learning and portfolio building.
+
+Feedback and suggestions are welcome 🙌
