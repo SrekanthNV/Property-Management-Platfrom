@@ -57,7 +57,7 @@ Displays:
 - Open maintenance tickets
 - Charts & recent activity feed
 
-![Dashboard Screenshot](browser:/tmp/codex_browser_invocations/823852d42d1cbb1b/artifacts/public/screenshots/dashboard.png)
+![Dashboard Screenshot](docs/screenshots/dashboard.svg)
 
 ### 🏢 Properties – `/properties`
 
@@ -70,7 +70,7 @@ Features:
 - Search / filtering
 - Status insights
 
-![Properties Screenshot](browser:/tmp/codex_browser_invocations/823852d42d1cbb1b/artifacts/public/screenshots/properties.png)
+![Properties Screenshot](docs/screenshots/properties.svg)
 
 ### 👥 Tenants – `/tenants`
 
@@ -83,7 +83,7 @@ Displays:
 - Contact information
 - Rental associations
 
-![Tenants Screenshot](browser:/tmp/codex_browser_invocations/823852d42d1cbb1b/artifacts/public/screenshots/tenants.png)
+![Tenants Screenshot](docs/screenshots/tenants.svg)
 
 ### 💳 Payments – `/payments`
 
@@ -96,7 +96,7 @@ Features:
 - Date logging
 - Revenue visualization
 
-![Payments Screenshot](browser:/tmp/codex_browser_invocations/823852d42d1cbb1b/artifacts/public/screenshots/payments.png)
+![Payments Screenshot](docs/screenshots/payments.svg)
 
 ### 🔧 Maintenance – `/maintenance`
 
@@ -109,7 +109,10 @@ Includes:
 - Issue categorization
 - Repair simulation lifecycle
 
-![Maintenance Screenshot](browser:/tmp/codex_browser_invocations/823852d42d1cbb1b/artifacts/public/screenshots/maintenance.png)
+![Maintenance Screenshot](docs/screenshots/maintenance.svg)
+
+> Note: The previous screenshot links pointed to a temporary local `browser:/tmp/...` path.
+> Screenshots are now stored in `docs/screenshots/` so they render correctly in GitHub and other Markdown viewers.
 
 ## 📂 Project Structure
 
