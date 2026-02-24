@@ -1,7 +1,3 @@
-// ============================================================
-// Root Layout
-// ============================================================
-
 import type { Metadata } from "next";
 import { AppShell } from "@/components/layout";
 import "@/styles/globals.css";

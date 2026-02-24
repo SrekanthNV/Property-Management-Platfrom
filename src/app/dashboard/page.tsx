@@ -1,7 +1,3 @@
-// ============================================================
-// Dashboard Page - Analytics & Overview
-// ============================================================
-
 "use client";
 
 import React, { useState } from "react";
@@ -10,7 +6,6 @@ import { Card, StatCard, StatusBadge, Avatar, Button, ProgressBar } from "@/comp
 import { mockDashboardStats, mockProperties, mockPayments, mockTickets } from "@/lib/mock-data";
 import { formatCurrency, formatDate, cn } from "@/lib/utils";
 
-// ---- Revenue Chart (simplified inline chart) ----
 function RevenueChart() {
   const data = mockDashboardStats.revenueByMonth;
   const maxRevenue = Math.max(...data.map((d) => d.revenue));
@@ -54,7 +49,6 @@ function RevenueChart() {
   );
 }
 
-// ---- Occupancy by Property ----
 function OccupancyCard() {
   return (
     <Card className="p-6">
@@ -74,7 +68,6 @@ function OccupancyCard() {
   );
 }
 
-// ---- Recent Payments Table ----
 function RecentPaymentsTable() {
   return (
     <Card className="overflow-hidden">
@@ -112,7 +105,6 @@ function RecentPaymentsTable() {
   );
 }
 
-// ---- Active Tickets ----
 function ActiveTickets() {
   const priorityOrder = { URGENT: 0, HIGH: 1, MEDIUM: 2, LOW: 3 };
   const activeTickets = mockTickets
@@ -147,7 +139,6 @@ function ActiveTickets() {
   );
 }
 
-// ---- Main Dashboard ----
 export default function DashboardPage() {
   const stats = mockDashboardStats;
 
@@ -158,7 +149,6 @@ export default function DashboardPage() {
         subtitle={`Welcome back, ${mockDashboardStats.totalProperties} properties managed`}
       />
       <div className="p-6 space-y-6">
-        {/* Stats Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 animate-in">
           <StatCard
             title="Total Revenue"
@@ -201,7 +191,6 @@ export default function DashboardPage() {
           />
         </div>
 
-        {/* Charts Row */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div className="lg:col-span-2">
             <RevenueChart />
@@ -209,7 +198,6 @@ export default function DashboardPage() {
           <OccupancyCard />
         </div>
 
-        {/* Tables Row */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <RecentPaymentsTable />
           <ActiveTickets />

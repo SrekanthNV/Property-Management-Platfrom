@@ -1,13 +1,8 @@
-// ============================================================
-// Reusable UI Component Library
-// ============================================================
-
 "use client";
 
 import React, { forwardRef } from "react";
 import { cn, getStatusColor, getInitials, formatCurrency } from "@/lib/utils";
 
-// ---- Status Badge ----
 interface BadgeProps {
   status: string;
   className?: string;
@@ -21,7 +16,6 @@ export function StatusBadge({ status, className }: BadgeProps) {
   );
 }
 
-// ---- Avatar ----
 interface AvatarProps {
   name: string;
   src?: string;
@@ -59,7 +53,6 @@ export function Avatar({ name, src, size = "md", className }: AvatarProps) {
   );
 }
 
-// ---- Card ----
 interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   hoverable?: boolean;
 }
@@ -77,7 +70,6 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(
 );
 Card.displayName = "Card";
 
-// ---- Stat Card ----
 interface StatCardProps {
   title: string;
   value: string | number;
@@ -117,7 +109,6 @@ export function StatCard({ title, value, change, icon, className }: StatCardProp
   );
 }
 
-// ---- Button ----
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "secondary" | "danger" | "ghost";
   size?: "sm" | "md" | "lg";
@@ -159,7 +150,6 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 );
 Button.displayName = "Button";
 
-// ---- Input ----
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   error?: string;
@@ -196,7 +186,6 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 );
 Input.displayName = "Input";
 
-// ---- Select ----
 interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
   label?: string;
   error?: string;
@@ -228,7 +217,6 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
 );
 Select.displayName = "Select";
 
-// ---- Textarea ----
 interface TextareaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   label?: string;
   error?: string;
@@ -257,7 +245,6 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
 );
 Textarea.displayName = "Textarea";
 
-// ---- Modal ----
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -298,7 +285,6 @@ export function Modal({ isOpen, onClose, title, children, size = "md" }: ModalPr
   );
 }
 
-// ---- Empty State ----
 interface EmptyStateProps {
   icon: React.ReactNode;
   title: string;
@@ -319,14 +305,12 @@ export function EmptyState({ icon, title, description, action }: EmptyStateProps
   );
 }
 
-// ---- Skeleton Loader ----
 export function Skeleton({ className }: { className?: string }) {
   return (
     <div className={cn("animate-pulse rounded-lg bg-surface-200", className)} />
   );
 }
 
-// ---- Search Bar ----
 interface SearchBarProps {
   value: string;
   onChange: (value: string) => void;
@@ -354,7 +338,6 @@ export function SearchBar({ value, onChange, placeholder = "Search...", classNam
   );
 }
 
-// ---- Progress Bar ----
 interface ProgressBarProps {
   value: number;
   max?: number;

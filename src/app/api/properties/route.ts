@@ -1,11 +1,5 @@
-// ============================================================
-// API Route - Properties CRUD
-// ============================================================
-
 import { NextRequest, NextResponse } from "next/server";
 
-// In production, these would use Prisma with a real database
-// For now, using in-memory mock data to demonstrate API structure
 
 const properties = [
   {
@@ -61,7 +55,6 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
 
-    // Validate required fields
     const required = ["name", "address", "city", "state", "zipCode", "type"];
     for (const field of required) {
       if (!body[field]) {

@@ -1,13 +1,8 @@
-// ============================================================
-// Custom React Hooks
-// ============================================================
-
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { debounce } from "@/lib/utils";
 
-/** Hook for managing async data fetching with loading/error states */
 export function useAsync<T>(
   asyncFn: () => Promise<T>,
   dependencies: unknown[] = []
@@ -36,7 +31,6 @@ export function useAsync<T>(
   return { data, loading, error, refetch: execute };
 }
 
-/** Hook for debounced search input */
 export function useDebounce<T>(value: T, delay = 300): T {
   const [debouncedValue, setDebouncedValue] = useState(value);
 
@@ -51,7 +45,6 @@ export function useDebounce<T>(value: T, delay = 300): T {
   return debouncedValue;
 }
 
-/** Hook for pagination */
 export function usePagination(totalItems: number, itemsPerPage = 10) {
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = Math.ceil(totalItems / itemsPerPage);
@@ -76,7 +69,6 @@ export function usePagination(totalItems: number, itemsPerPage = 10) {
   };
 }
 
-/** Hook for modal state management */
 export function useModal() {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -87,7 +79,6 @@ export function useModal() {
   return { isOpen, open, close, toggle };
 }
 
-/** Hook for local storage persistence */
 export function useLocalStorage<T>(key: string, initialValue: T) {
   const [storedValue, setStoredValue] = useState<T>(() => {
     if (typeof window === "undefined") return initialValue;
@@ -110,7 +101,6 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
   return [storedValue, setValue] as const;
 }
 
-/** Hook for detecting clicks outside an element */
 export function useClickOutside(
   ref: React.RefObject<HTMLElement>,
   handler: () => void
@@ -129,7 +119,6 @@ export function useClickOutside(
   }, [ref, handler]);
 }
 
-/** Hook for responsive breakpoints */
 export function useMediaQuery(query: string): boolean {
   const [matches, setMatches] = useState(false);
 
@@ -157,7 +146,6 @@ export function useIsDesktop() {
   return useMediaQuery("(min-width: 1025px)");
 }
 
-/** Hook for notification state */
 export function useNotifications() {
   const [notifications, setNotifications] = useState<
     { id: string; title: string; message: string; read: boolean; createdAt: Date }[]

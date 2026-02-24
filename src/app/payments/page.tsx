@@ -1,7 +1,3 @@
-// ============================================================
-// Payments Page - Collection & Tracking
-// ============================================================
-
 "use client";
 
 import React, { useState } from "react";
@@ -11,7 +7,6 @@ import { mockPayments } from "@/lib/mock-data";
 import { formatCurrency, formatDate, cn } from "@/lib/utils";
 import type { Payment } from "@/types";
 
-// ---- Payment Row ----
 function PaymentRow({ payment }: { payment: Payment }) {
   return (
     <tr className="table-row cursor-pointer">
@@ -43,7 +38,6 @@ function PaymentRow({ payment }: { payment: Payment }) {
   );
 }
 
-// ---- Record Payment Modal ----
 function RecordPaymentModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
   return (
     <Modal isOpen={isOpen} onClose={onClose} title="Record Payment" size="md">
@@ -81,7 +75,6 @@ function RecordPaymentModal({ isOpen, onClose }: { isOpen: boolean; onClose: () 
   );
 }
 
-// ---- Main Payments Page ----
 export default function PaymentsPage() {
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("ALL");
@@ -119,7 +112,6 @@ export default function PaymentsPage() {
       />
 
       <div className="p-6 space-y-6">
-        {/* Stats */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <StatCard
             title="Collected This Month"
@@ -150,7 +142,6 @@ export default function PaymentsPage() {
           />
         </div>
 
-        {/* Filters & Table */}
         <Card className="overflow-hidden">
           <div className="flex flex-wrap items-center gap-3 px-6 py-4 border-b border-surface-100">
             <SearchBar value={search} onChange={setSearch} placeholder="Search payments..." className="w-64" />

@@ -1,8 +1,3 @@
-// ============================================================
-// Property Management Platform - Type Definitions
-// ============================================================
-
-// ---- User & Auth ----
 export type UserRole = "ADMIN" | "MANAGER" | "TENANT";
 
 export interface User {
@@ -33,7 +28,6 @@ export interface RegisterData extends LoginCredentials {
   phone?: string;
 }
 
-// ---- Property ----
 export type PropertyType = "APARTMENT" | "HOUSE" | "CONDO" | "TOWNHOUSE" | "COMMERCIAL";
 export type PropertyStatus = "ACTIVE" | "INACTIVE" | "MAINTENANCE";
 
@@ -71,7 +65,6 @@ export interface Unit {
   leaseId?: string;
 }
 
-// ---- Tenant ----
 export type LeaseStatus = "ACTIVE" | "PENDING" | "EXPIRED" | "TERMINATED";
 
 export interface Tenant {
@@ -104,7 +97,6 @@ export interface Lease {
   createdAt: Date;
 }
 
-// ---- Payment ----
 export type PaymentStatus = "PENDING" | "COMPLETED" | "FAILED" | "REFUNDED";
 export type PaymentMethod = "CARD" | "BANK_TRANSFER" | "CHECK" | "CASH";
 
@@ -130,7 +122,6 @@ export interface PaymentIntent {
   currency: string;
 }
 
-// ---- Maintenance ----
 export type TicketPriority = "LOW" | "MEDIUM" | "HIGH" | "URGENT";
 export type TicketStatus = "OPEN" | "IN_PROGRESS" | "WAITING" | "RESOLVED" | "CLOSED";
 export type TicketCategory =
@@ -173,7 +164,6 @@ export interface TicketNote {
   createdAt: Date;
 }
 
-// ---- Notifications ----
 export type NotificationType =
   | "PAYMENT_DUE"
   | "PAYMENT_RECEIVED"
@@ -194,7 +184,6 @@ export interface Notification {
   createdAt: Date;
 }
 
-// ---- Dashboard ----
 export interface DashboardStats {
   totalProperties: number;
   totalUnits: number;
@@ -209,7 +198,6 @@ export interface DashboardStats {
   occupancyByProperty: { property: string; rate: number }[];
 }
 
-// ---- API Response ----
 export interface ApiResponse<T> {
   success: boolean;
   data?: T;

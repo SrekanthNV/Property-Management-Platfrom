@@ -1,7 +1,3 @@
-// ============================================================
-// API Route - Payments
-// ============================================================
-
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
@@ -10,12 +6,6 @@ export async function GET(request: NextRequest) {
     const status = searchParams.get("status");
     const tenantId = searchParams.get("tenantId");
 
-    // In production: query database with Prisma
-    // const payments = await prisma.payment.findMany({
-    //   where: { ...(status && { status }), ...(tenantId && { tenantId }) },
-    //   include: { tenant: { include: { user: true } } },
-    //   orderBy: { createdAt: 'desc' },
-    // });
 
     return NextResponse.json({
       success: true,
@@ -42,12 +32,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // In production: create Stripe PaymentIntent
-    // const paymentIntent = await stripe.paymentIntents.create({
-    //   amount: Math.round(amount * 100),
-    //   currency: 'usd',
-    //   metadata: { tenantId, description },
-    // });
 
     const payment = {
       id: `pay_${Date.now()}`,

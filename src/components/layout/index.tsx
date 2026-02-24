@@ -1,7 +1,3 @@
-// ============================================================
-// Layout Components - Sidebar, Header, Shell
-// ============================================================
-
 "use client";
 
 import Link from "next/link";
@@ -11,7 +7,6 @@ import { cn } from "@/lib/utils";
 import { Avatar } from "@/components/ui";
 import { mockUser, mockNotifications } from "@/lib/mock-data";
 
-// ---- Navigation Items ----
 const navigation = [
   {
     name: "Dashboard",
@@ -73,7 +68,6 @@ const bottomNav = [
   },
 ];
 
-// ---- Sidebar ----
 interface SidebarProps {
   activePath: string;
   collapsed?: boolean;
@@ -88,7 +82,6 @@ export function Sidebar({ activePath, collapsed = false, onToggle }: SidebarProp
         collapsed ? "w-[72px]" : "w-[260px]"
       )}
     >
-      {/* Logo */}
       <div className="flex h-16 items-center gap-3 border-b border-surface-100 px-4">
         <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-brand-600 text-white font-bold text-sm flex-shrink-0">
           PM
@@ -111,7 +104,6 @@ export function Sidebar({ activePath, collapsed = false, onToggle }: SidebarProp
         </button>
       </div>
 
-      {/* Navigation */}
       <nav className="flex-1 space-y-1 p-3 overflow-y-auto scrollbar-thin">
         {navigation.map((item) => (
           <Link
@@ -130,7 +122,6 @@ export function Sidebar({ activePath, collapsed = false, onToggle }: SidebarProp
         ))}
       </nav>
 
-      {/* Bottom nav + User */}
       <div className="border-t border-surface-100 p-3 space-y-1">
         {bottomNav.map((item) => (
           <Link
@@ -160,7 +151,6 @@ export function Sidebar({ activePath, collapsed = false, onToggle }: SidebarProp
   );
 }
 
-// ---- Header ----
 interface HeaderProps {
   title: string;
   subtitle?: string;
@@ -180,7 +170,6 @@ export function Header({ title, subtitle, actions, sidebarCollapsed }: HeaderPro
       </div>
       <div className="flex items-center gap-3">
         {actions}
-        {/* Notification Bell */}
         <div className="relative">
           <button
             onClick={() => setShowNotifications(!showNotifications)}
@@ -196,7 +185,6 @@ export function Header({ title, subtitle, actions, sidebarCollapsed }: HeaderPro
             )}
           </button>
 
-          {/* Notification Dropdown */}
           {showNotifications && (
             <div className="absolute right-0 top-12 w-80 rounded-xl bg-white border border-surface-200 shadow-modal animate-scale-in overflow-hidden">
               <div className="flex items-center justify-between px-4 py-3 border-b border-surface-100">
@@ -227,7 +215,6 @@ export function Header({ title, subtitle, actions, sidebarCollapsed }: HeaderPro
   );
 }
 
-// ---- App Shell ----
 interface AppShellProps {
   children: React.ReactNode;
 }

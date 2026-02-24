@@ -1,7 +1,3 @@
-// ============================================================
-// Properties Page - List & Management
-// ============================================================
-
 "use client";
 
 import React, { useState } from "react";
@@ -14,7 +10,6 @@ import { mockProperties, mockUnits } from "@/lib/mock-data";
 import { formatCurrency, calculateOccupancyRate, cn } from "@/lib/utils";
 import type { Property } from "@/types";
 
-// ---- Property Card ----
 function PropertyCard({ property, onClick }: { property: Property; onClick: () => void }) {
   const occupancy = calculateOccupancyRate(property.occupiedUnits, property.units);
 
@@ -80,7 +75,6 @@ function PropertyCard({ property, onClick }: { property: Property; onClick: () =
   );
 }
 
-// ---- Add Property Modal ----
 function AddPropertyModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
   return (
     <Modal isOpen={isOpen} onClose={onClose} title="Add New Property" size="lg">
@@ -115,7 +109,6 @@ function AddPropertyModal({ isOpen, onClose }: { isOpen: boolean; onClose: () =>
   );
 }
 
-// ---- Property Detail Panel ----
 function PropertyDetailPanel({ property, onClose }: { property: Property; onClose: () => void }) {
   const propertyUnits = mockUnits.filter((u) => u.propertyId === property.id);
 
@@ -131,7 +124,6 @@ function PropertyDetailPanel({ property, onClose }: { property: Property; onClos
       </div>
 
       <div className="p-6 space-y-6">
-        {/* Property Info */}
         <div>
           <div className="flex items-center gap-2 mb-3">
             <StatusBadge status={property.status} />
@@ -145,7 +137,6 @@ function PropertyDetailPanel({ property, onClose }: { property: Property; onClos
           )}
         </div>
 
-        {/* Quick Stats */}
         <div className="grid grid-cols-3 gap-4">
           <div className="text-center p-3 bg-surface-50 rounded-lg">
             <p className="text-xl font-bold text-gray-900">{property.units}</p>
@@ -161,7 +152,6 @@ function PropertyDetailPanel({ property, onClose }: { property: Property; onClos
           </div>
         </div>
 
-        {/* Amenities */}
         <div>
           <h3 className="text-sm font-semibold text-gray-900 mb-2">Amenities</h3>
           <div className="flex flex-wrap gap-2">
@@ -171,7 +161,6 @@ function PropertyDetailPanel({ property, onClose }: { property: Property; onClos
           </div>
         </div>
 
-        {/* Units List */}
         <div>
           <h3 className="text-sm font-semibold text-gray-900 mb-3">Units</h3>
           <div className="space-y-2">
@@ -199,7 +188,6 @@ function PropertyDetailPanel({ property, onClose }: { property: Property; onClos
   );
 }
 
-// ---- Main Properties Page ----
 export default function PropertiesPage() {
   const [search, setSearch] = useState("");
   const [showAddModal, setShowAddModal] = useState(false);
@@ -231,7 +219,6 @@ export default function PropertiesPage() {
       />
 
       <div className="p-6">
-        {/* Filters */}
         <div className="flex flex-wrap items-center gap-3 mb-6">
           <SearchBar
             value={search}
@@ -270,7 +257,6 @@ export default function PropertiesPage() {
           </div>
         </div>
 
-        {/* Property Grid */}
         {filtered.length > 0 ? (
           <div className={cn(
             viewMode === "grid"
