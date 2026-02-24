@@ -1,0 +1,320 @@
+// ============================================================
+// Prisma Schema - Property Management Platform
+// ============================================================
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ---- User & Auth ----
+
+enum UserRole {
+  ADMIN
+  MANAGER
+  TENANT
+}
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  passwordHash  String
+  name          String
+  role          UserRole  @default(TENANT)
+  phone         String?
+  avatarUrl     String?
+  isActive      Boolean   @default(true)
+  lastLoginAt   DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Relations
+  properties    Property[]       @relation("ManagedProperties")
+  tenant        Tenant?
+  notifications Notification[]
+  ticketNotes   TicketNote[]
+  sessions      Session[]
+
+  @@index([email])
+  @@index([role])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  token        String   @unique
+  refreshToken String   @unique
+  expiresAt    DateTime
+  createdAt    DateTime @default(now())
+
+  @@index([token])
+  @@index([userId])
+}
+
+// ---- Property ----
+
+enum PropertyType {
+  APARTMENT
+  HOUSE
+  CONDO
+  TOWNHOUSE
+  COMMERCIAL
+}
+
+enum PropertyStatus {
+  ACTIVE
+  INACTIVE
+  MAINTENANCE
+}
+
+model Property {
+  id          String         @id @default(cuid())
+  name        String
+  address     String
+  city        String
+  state       String
+  zipCode     String
+  type        PropertyType
+  status      PropertyStatus @default(ACTIVE)
+  description String?
+  imageUrl    String?
+  amenities   String[]
+  managerId   String
+  manager     User           @relation("ManagedProperties", fields: [managerId], references: [id])
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+
+  // Relations
+  units       Unit[]
+  payments    Payment[]
+  tickets     MaintenanceTicket[]
+
+  @@index([managerId])
+  @@index([city, state])
+}
+
+model Unit {
+  id          String     @id @default(cuid())
+  propertyId  String
+  property    Property   @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  unitNumber  String
+  floor       Int        @default(1)
+  bedrooms    Int
+  bathrooms   Float
+  sqft        Int
+  rent        Float
+  status      UnitStatus @default(VACANT)
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  // Relations
+  tenant      Tenant?
+  leases      Lease[]
+  payments    Payment[]
+  tickets     MaintenanceTicket[]
+
+  @@unique([propertyId, unitNumber])
+  @@index([propertyId])
+  @@index([status])
+}
+
+enum UnitStatus {
+  VACANT
+  OCCUPIED
+  MAINTENANCE
+}
+
+// ---- Tenant & Lease ----
+
+model Tenant {
+  id               String   @id @default(cuid())
+  userId           String   @unique
+  user             User     @relation(fields: [userId], references: [id])
+  unitId           String   @unique
+  unit             Unit     @relation(fields: [unitId], references: [id])
+  emergencyContact String?
+  moveInDate       DateTime
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  // Relations
+  leases           Lease[]
+  payments         Payment[]
+  tickets          MaintenanceTicket[]
+
+  @@index([userId])
+  @@index([unitId])
+}
+
+enum LeaseStatus {
+  ACTIVE
+  PENDING
+  EXPIRED
+  TERMINATED
+}
+
+model Lease {
+  id              String      @id @default(cuid())
+  tenantId        String
+  tenant          Tenant      @relation(fields: [tenantId], references: [id])
+  unitId          String
+  unit            Unit        @relation(fields: [unitId], references: [id])
+  startDate       DateTime
+  endDate         DateTime
+  monthlyRent     Float
+  securityDeposit Float
+  status          LeaseStatus @default(PENDING)
+  terms           String      @db.Text
+  documentUrl     String?
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+
+  @@index([tenantId])
+  @@index([unitId])
+  @@index([status])
+}
+
+// ---- Payment ----
+
+enum PaymentStatus {
+  PENDING
+  COMPLETED
+  FAILED
+  REFUNDED
+}
+
+enum PaymentMethod {
+  CARD
+  BANK_TRANSFER
+  CHECK
+  CASH
+}
+
+model Payment {
+  id              String        @id @default(cuid())
+  tenantId        String
+  tenant          Tenant        @relation(fields: [tenantId], references: [id])
+  propertyId      String
+  property        Property      @relation(fields: [propertyId], references: [id])
+  unitId          String
+  unit            Unit          @relation(fields: [unitId], references: [id])
+  amount          Float
+  status          PaymentStatus @default(PENDING)
+  method          PaymentMethod @default(CARD)
+  description     String
+  dueDate         DateTime
+  paidDate        DateTime?
+  stripePaymentId String?       @unique
+  receiptUrl      String?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  @@index([tenantId])
+  @@index([propertyId])
+  @@index([status])
+  @@index([dueDate])
+}
+
+// ---- Maintenance ----
+
+enum TicketPriority {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+}
+
+enum TicketStatus {
+  OPEN
+  IN_PROGRESS
+  WAITING
+  RESOLVED
+  CLOSED
+}
+
+enum TicketCategory {
+  PLUMBING
+  ELECTRICAL
+  HVAC
+  APPLIANCE
+  STRUCTURAL
+  PEST
+  GENERAL
+  OTHER
+}
+
+model MaintenanceTicket {
+  id            String         @id @default(cuid())
+  tenantId      String
+  tenant        Tenant         @relation(fields: [tenantId], references: [id])
+  propertyId    String
+  property      Property       @relation(fields: [propertyId], references: [id])
+  unitId        String
+  unit          Unit           @relation(fields: [unitId], references: [id])
+  title         String
+  description   String         @db.Text
+  category      TicketCategory
+  priority      TicketPriority @default(MEDIUM)
+  status        TicketStatus   @default(OPEN)
+  assignedTo    String?
+  images        String[]
+  estimatedCost Float?
+  actualCost    Float?
+  scheduledDate DateTime?
+  resolvedDate  DateTime?
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+
+  // Relations
+  notes         TicketNote[]
+
+  @@index([tenantId])
+  @@index([propertyId])
+  @@index([status])
+  @@index([priority])
+}
+
+model TicketNote {
+  id        String   @id @default(cuid())
+  ticketId  String
+  ticket    MaintenanceTicket @relation(fields: [ticketId], references: [id], onDelete: Cascade)
+  authorId  String
+  author    User     @relation(fields: [authorId], references: [id])
+  content   String   @db.Text
+  createdAt DateTime @default(now())
+
+  @@index([ticketId])
+}
+
+// ---- Notifications ----
+
+enum NotificationType {
+  PAYMENT_DUE
+  PAYMENT_RECEIVED
+  PAYMENT_LATE
+  MAINTENANCE_UPDATE
+  LEASE_EXPIRING
+  ANNOUNCEMENT
+  SYSTEM
+}
+
+model Notification {
+  id        String           @id @default(cuid())
+  userId    String
+  user      User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type      NotificationType
+  title     String
+  message   String
+  read      Boolean          @default(false)
+  actionUrl String?
+  createdAt DateTime         @default(now())
+
+  @@index([userId])
+  @@index([read])
+  @@index([createdAt])
+}
