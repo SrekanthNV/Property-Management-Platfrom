@@ -1,7 +1,3 @@
-// ============================================================
-// API Route - Maintenance Tickets
-// ============================================================
-
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
@@ -11,16 +7,6 @@ export async function GET(request: NextRequest) {
     const priority = searchParams.get("priority");
     const propertyId = searchParams.get("propertyId");
 
-    // In production: query database with Prisma
-    // const tickets = await prisma.maintenanceTicket.findMany({
-    //   where: {
-    //     ...(status && { status }),
-    //     ...(priority && { priority }),
-    //     ...(propertyId && { propertyId }),
-    //   },
-    //   include: { tenant: { include: { user: true } }, notes: true },
-    //   orderBy: [{ priority: 'desc' }, { createdAt: 'desc' }],
-    // });
 
     return NextResponse.json({
       success: true,
@@ -63,12 +49,6 @@ export async function POST(request: NextRequest) {
       updatedAt: new Date().toISOString(),
     };
 
-    // In production: notify property manager via WebSocket/push notification
-    // await notificationService.send(managerId, {
-    //   type: 'MAINTENANCE_UPDATE',
-    //   title: 'New Maintenance Request',
-    //   message: `${ticket.title} - Priority: ${ticket.priority}`,
-    // });
 
     return NextResponse.json(
       { success: true, data: ticket },

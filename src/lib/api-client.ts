@@ -1,7 +1,3 @@
-// ============================================================
-// API Client - Shared between Web & Android
-// ============================================================
-
 import type { ApiResponse, PaginatedResponse } from "@/types";
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "/api";
@@ -60,7 +56,6 @@ class ApiClient {
     }
   }
 
-  // ---- Auth ----
   async login(email: string, password: string) {
     return this.request("/auth/login", {
       method: "POST",
@@ -82,7 +77,6 @@ class ApiClient {
     });
   }
 
-  // ---- Properties ----
   async getProperties(params?: { page?: number; limit?: number; search?: string }) {
     const query = new URLSearchParams(params as Record<string, string>).toString();
     return this.request(`/properties${query ? `?${query}` : ""}`);
@@ -110,7 +104,6 @@ class ApiClient {
     return this.request(`/properties/${id}`, { method: "DELETE" });
   }
 
-  // ---- Tenants ----
   async getTenants(params?: { page?: number; limit?: number; propertyId?: string }) {
     const query = new URLSearchParams(params as Record<string, string>).toString();
     return this.request(`/tenants${query ? `?${query}` : ""}`);
@@ -127,7 +120,6 @@ class ApiClient {
     });
   }
 
-  // ---- Payments ----
   async getPayments(params?: { page?: number; limit?: number; status?: string }) {
     const query = new URLSearchParams(params as Record<string, string>).toString();
     return this.request(`/payments${query ? `?${query}` : ""}`);
@@ -147,7 +139,6 @@ class ApiClient {
     });
   }
 
-  // ---- Maintenance ----
   async getTickets(params?: { page?: number; limit?: number; status?: string; priority?: string }) {
     const query = new URLSearchParams(params as Record<string, string>).toString();
     return this.request(`/maintenance${query ? `?${query}` : ""}`);
@@ -178,7 +169,6 @@ class ApiClient {
     });
   }
 
-  // ---- Notifications ----
   async getNotifications(params?: { unreadOnly?: boolean }) {
     const query = params?.unreadOnly ? "?unread=true" : "";
     return this.request(`/notifications${query}`);
@@ -192,7 +182,6 @@ class ApiClient {
     return this.request("/notifications/read-all", { method: "PUT" });
   }
 
-  // ---- Dashboard ----
   async getDashboardStats() {
     return this.request("/dashboard/stats");
   }

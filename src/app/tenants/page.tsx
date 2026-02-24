@@ -1,7 +1,3 @@
-// ============================================================
-// Tenants Page - Tenant Management
-// ============================================================
-
 "use client";
 
 import React, { useState } from "react";
@@ -11,7 +7,6 @@ import { mockTenants } from "@/lib/mock-data";
 import { formatCurrency, formatDate, cn } from "@/lib/utils";
 import type { Tenant } from "@/types";
 
-// ---- Tenant Card ----
 function TenantCard({ tenant, onClick }: { tenant: Tenant; onClick: () => void }) {
   return (
     <Card hoverable className="p-5 cursor-pointer" onClick={onClick}>
@@ -48,7 +43,6 @@ function TenantCard({ tenant, onClick }: { tenant: Tenant; onClick: () => void }
   );
 }
 
-// ---- Tenant Detail Panel ----
 function TenantDetailPanel({ tenant, onClose }: { tenant: Tenant; onClose: () => void }) {
   return (
     <div className="fixed inset-y-0 right-0 z-50 w-full max-w-xl bg-white shadow-modal border-l border-surface-200 animate-slide-up overflow-y-auto">
@@ -109,7 +103,6 @@ function TenantDetailPanel({ tenant, onClose }: { tenant: Tenant; onClose: () =>
   );
 }
 
-// ---- Add Tenant Modal ----
 function AddTenantModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
   return (
     <Modal isOpen={isOpen} onClose={onClose} title="Add New Tenant" size="lg">
@@ -146,7 +139,6 @@ function AddTenantModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => v
   );
 }
 
-// ---- Main Tenants Page ----
 export default function TenantsPage() {
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("ALL");

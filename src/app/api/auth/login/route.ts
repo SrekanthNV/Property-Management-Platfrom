@@ -1,11 +1,5 @@
-// ============================================================
-// API Route - Authentication
-// ============================================================
-
 import { NextRequest, NextResponse } from "next/server";
 
-// In production: use bcrypt for password hashing, JWT for tokens
-// This demonstrates the API contract for the Android app
 
 export async function POST(request: NextRequest) {
   try {
@@ -19,11 +13,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Mock authentication - in production, validate against database
-    // const user = await prisma.user.findUnique({ where: { email } });
-    // const valid = await bcrypt.compare(password, user.passwordHash);
 
-    // Simulate successful login
     const mockUser = {
       id: "usr_001",
       email,

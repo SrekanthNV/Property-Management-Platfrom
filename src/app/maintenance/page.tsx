@@ -1,7 +1,3 @@
-// ============================================================
-// Maintenance Page - Ticket Management
-// ============================================================
-
 "use client";
 
 import React, { useState } from "react";
@@ -14,7 +10,6 @@ import { mockTickets } from "@/lib/mock-data";
 import { formatCurrency, formatDate, getPriorityIcon, cn } from "@/lib/utils";
 import type { MaintenanceTicket } from "@/types";
 
-// ---- Ticket Card ----
 function TicketCard({ ticket, onClick }: { ticket: MaintenanceTicket; onClick: () => void }) {
   return (
     <Card hoverable className="p-5 cursor-pointer" onClick={onClick}>
@@ -57,7 +52,6 @@ function TicketCard({ ticket, onClick }: { ticket: MaintenanceTicket; onClick: (
   );
 }
 
-// ---- Create Ticket Modal ----
 function CreateTicketModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
   return (
     <Modal isOpen={isOpen} onClose={onClose} title="Create Maintenance Ticket" size="lg">
@@ -117,7 +111,6 @@ function CreateTicketModal({ isOpen, onClose }: { isOpen: boolean; onClose: () =
   );
 }
 
-// ---- Ticket Detail Panel ----
 function TicketDetailPanel({ ticket, onClose }: { ticket: MaintenanceTicket; onClose: () => void }) {
   return (
     <div className="fixed inset-y-0 right-0 z-50 w-full max-w-xl bg-white shadow-modal border-l border-surface-200 animate-slide-up overflow-y-auto">
@@ -168,7 +161,6 @@ function TicketDetailPanel({ ticket, onClose }: { ticket: MaintenanceTicket; onC
           )}
         </div>
 
-        {/* Notes / Activity */}
         <div>
           <h3 className="text-sm font-semibold text-gray-900 mb-3">Activity</h3>
           {ticket.notes.length > 0 ? (
@@ -195,7 +187,6 @@ function TicketDetailPanel({ ticket, onClose }: { ticket: MaintenanceTicket; onC
           </div>
         </div>
 
-        {/* Actions */}
         <div className="flex gap-3 pt-2 border-t border-surface-100">
           <Button variant="primary" className="flex-1">Update Status</Button>
           <Button variant="secondary" className="flex-1">Assign</Button>
@@ -205,7 +196,6 @@ function TicketDetailPanel({ ticket, onClose }: { ticket: MaintenanceTicket; onC
   );
 }
 
-// ---- Main Maintenance Page ----
 export default function MaintenancePage() {
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("ALL");
@@ -244,7 +234,6 @@ export default function MaintenancePage() {
       />
 
       <div className="p-6 space-y-6">
-        {/* Status summary */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
           {Object.entries(statusCounts).map(([status, count]) => (
             <button
@@ -261,7 +250,6 @@ export default function MaintenancePage() {
           ))}
         </div>
 
-        {/* Filters */}
         <div className="flex flex-wrap items-center gap-3">
           <SearchBar value={search} onChange={setSearch} placeholder="Search tickets..." className="w-64" />
           <Select
@@ -277,7 +265,6 @@ export default function MaintenancePage() {
           />
         </div>
 
-        {/* Tickets Grid */}
         {filtered.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
             {filtered.map((ticket, i) => (
