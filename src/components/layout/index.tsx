@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import React, { useState } from "react";
 import { cn } from "@/lib/utils";
 import { Avatar } from "@/components/ui";
@@ -68,12 +70,11 @@ const bottomNav = [
 
 interface SidebarProps {
   activePath: string;
-  onNavigate: (path: string) => void;
   collapsed?: boolean;
   onToggle?: () => void;
 }
 
-export function Sidebar({ activePath, onNavigate, collapsed = false, onToggle }: SidebarProps) {
+export function Sidebar({ activePath, collapsed = false, onToggle }: SidebarProps) {
   return (
     <aside
       className={cn(
@@ -105,9 +106,9 @@ export function Sidebar({ activePath, onNavigate, collapsed = false, onToggle }:
 
       <nav className="flex-1 space-y-1 p-3 overflow-y-auto scrollbar-thin">
         {navigation.map((item) => (
-          <button
+          <Link
             key={item.name}
-            onClick={() => onNavigate(item.href)}
+            href={item.href}
             className={cn(
               activePath === item.href ? "nav-item-active" : "nav-item",
               "w-full",
@@ -117,15 +118,15 @@ export function Sidebar({ activePath, onNavigate, collapsed = false, onToggle }:
           >
             {item.icon}
             {!collapsed && <span>{item.name}</span>}
-          </button>
+          </Link>
         ))}
       </nav>
 
       <div className="border-t border-surface-100 p-3 space-y-1">
         {bottomNav.map((item) => (
-          <button
+          <Link
             key={item.name}
-            onClick={() => onNavigate(item.href)}
+            href={item.href}
             className={cn(
               activePath === item.href ? "nav-item-active" : "nav-item",
               "w-full",
@@ -134,7 +135,7 @@ export function Sidebar({ activePath, onNavigate, collapsed = false, onToggle }:
           >
             {item.icon}
             {!collapsed && <span>{item.name}</span>}
-          </button>
+          </Link>
         ))}
         <div className={cn("flex items-center gap-3 rounded-lg p-2.5", collapsed && "justify-center")}>
           <Avatar name={mockUser.name} size="sm" />
@@ -219,14 +220,13 @@ interface AppShellProps {
 }
 
 export function AppShell({ children }: AppShellProps) {
-  const [activePath, setActivePath] = useState("/dashboard");
+  const pathname = usePathname();
   const [collapsed, setCollapsed] = useState(false);
 
   return (
     <div className="min-h-screen bg-surface-50">
       <Sidebar
-        activePath={activePath}
-        onNavigate={setActivePath}
+        activePath={pathname}
         collapsed={collapsed}
         onToggle={() => setCollapsed(!collapsed)}
       />
